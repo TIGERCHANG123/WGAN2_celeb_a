@@ -13,11 +13,11 @@ from tensorflow.compat.v1 import InteractiveSession
 
 ubuntu_root='/home/tigerc'
 windows_root='D:/Automatic/SRTP/GAN'
-# root = '/content/drive/My Drive'
-root = ubuntu_root
+root = '/content/drive/My Drive'
+# root = ubuntu_root
 temp_root = root+'/temp'
-# dataset_root = '/content'
-dataset_root = root
+dataset_root = '/content'
+# dataset_root = root
 
 def main(continue_train, train_time, train_epoch):
     os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'  # or any {'0', '1', '2'}
