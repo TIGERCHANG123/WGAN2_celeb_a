@@ -1,5 +1,7 @@
 # -*- coding:utf-8 -*-
 import os
+import getopt
+import sys
 import tensorflow as tf
 from WGAN import get_gan
 from show_pic import draw
@@ -17,7 +19,7 @@ temp_root = root+'/temp'
 # dataset_root = '/content'
 dataset_root = root
 
-def main(continue_train, train_time):
+def main(continue_train, train_time, train_epoch):
     os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'  # or any {'0', '1', '2'}
     noise_dim = 100
     batch_size = 64
@@ -45,7 +47,7 @@ def main(continue_train, train_time):
     train = train_one_epoch(model=[generator_model, discriminator_model], train_dataset=train_dataset,
               optimizers=[generator_optimizer, discriminator_optimizer], metrics=[gen_loss, disc_loss], noise_dim=noise_dim, gp=20)
 
-    for epoch in range(1000):
+    for epoch in range(train_epoch):
         train.train(epoch=epoch, pic=pic)
         pic.show()
         if (epoch + 1) % 5 == 0:
@@ -63,8 +65,24 @@ def main(continue_train, train_time):
 
     return
 if __name__ == '__main__':
+    continue_train = False
+    train_time = 0
+    epoch = 500
+    try:
+        opts, args = getopt.getopt(sys.argv[1:], '-c-t:-e:', ['continue', 'time=', 'epoch='])
+        for op, value in opts:
+            print(op, value)
+            if op in ('-c', '--continue'):
+                continue_train = True
+            elif op in ('-t', '--time'):
+                train_time = int(value)
+            elif op in ('-e', '--epoch'):
+                epoch = int(value)
+    except:
+        print('wrong input!')
+
     config = ConfigProto()
     config.gpu_options.allow_growth = True
     session = InteractiveSession(config=config)
 
-    main(continue_train=False, train_time=0)
+    main(continue_train=continue_train, train_time=train_time, train_epoch=epoch)

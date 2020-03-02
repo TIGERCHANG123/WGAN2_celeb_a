@@ -18,5 +18,5 @@ class mnist_dataset():
         y = tf.cast(y, tf.int64)
         return x
     def get_train_dataset(self):
-        train_dataset = self.train_dataset.map(self.parse).shuffle(60000).batch(self.batch_size)
+        train_dataset = self.train_dataset.map(self.parse).shuffle(10000).batch(self.batch_size)
         return train_dataset
