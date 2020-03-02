@@ -5,8 +5,8 @@ import cv2
 
 class celeb_a_dataset():
     def __init__(self, root, batch_size):
-        self.file_path = root + '/datasets/celeb_a/img_align_celeba'
-        self.image_width = 128
+        self.file_path = root + '/datasets/CelebA/Img/img_align_celeba'
+        self.image_width = 64
         self.batch_size = batch_size
         self.file_list = os.listdir(self.file_path)
         print('total images: {}'.format(len(self.file_list)))
