@@ -22,7 +22,7 @@ class generator(tf.keras.Model):
 class discriminator(tf.keras.Model):
   def __init__(self):
     super(discriminator, self).__init__()
-    self.input_layer = discriminator_Input(filters=128, strides=2)
+    self.input_layer = discriminator_Input(filters=128, strides=1)
     self.middle_layer_list = [
       discriminator_Middle(filters=256, strides=2, padding='same'),
       discriminator_Middle(filters=512, strides=2, padding='same'),
