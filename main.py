@@ -26,8 +26,8 @@ def main(continue_train, train_time, train_epoch):
 
     train_dataset = dataset.get_train_dataset()
     pic = draw(10, temp_root, model_dataset, train_time=train_time)
-    generator_optimizer = tf.keras.optimizers.Adam(2e-4, beta_1=0.5)
-    discriminator_optimizer = tf.keras.optimizers.Adam(2e-4, beta_1=0.5)
+    generator_optimizer = tf.keras.optimizers.Adam(1e-4, beta_1=0.5)
+    discriminator_optimizer = tf.keras.optimizers.Adam(1e-4, beta_1=0.5)
 
     checkpoint_path = temp_root + '/temp_model_save/' + model_dataset
     ckpt = tf.train.Checkpoint(genetator_optimizers=generator_optimizer, discriminator_optimizer=discriminator_optimizer ,
