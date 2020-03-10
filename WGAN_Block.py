@@ -20,7 +20,7 @@ class generator_Input(tf.keras.Model):
 class generator_Middle(tf.keras.Model):
   def __init__(self, filters, strides, padding):
       super(generator_Middle, self).__init__()
-      self.conv = layers.Conv2DTranspose(filters, kernel_size=4, strides=strides, padding=padding, use_bias=False, kernel_initializer=RandomNormal(stddev=0.02))
+      self.conv = layers.Conv2DTranspose(filters, kernel_size=5, strides=strides, padding=padding, use_bias=False, kernel_initializer=RandomNormal(stddev=0.02))
       self.bn = layers.BatchNormalization(momentum=0.9)
       self.relu = tf.keras.layers.ReLU()
   def call(self, x):
@@ -32,7 +32,7 @@ class generator_Middle(tf.keras.Model):
 class generator_Output(tf.keras.Model):
   def __init__(self, image_depth, strides, padding):
     super(generator_Output, self).__init__()
-    self.conv = layers.Conv2DTranspose(image_depth, kernel_size=4, strides=strides, padding=padding, use_bias=False, kernel_initializer=RandomNormal(stddev=0.02))
+    self.conv = layers.Conv2DTranspose(image_depth, kernel_size=5, strides=strides, padding=padding, use_bias=False, kernel_initializer=RandomNormal(stddev=0.02))
     self.actv = layers.Activation(activation='tanh')
   def call(self, x):
     x = self.conv(x)
@@ -42,7 +42,7 @@ class generator_Output(tf.keras.Model):
 class discriminator_Input(tf.keras.Model):
   def __init__(self, filters, strides):
     super(discriminator_Input, self).__init__()
-    self.conv = keras.layers.Conv2D(filters, kernel_size=4, strides=strides, padding="same", kernel_initializer=RandomNormal(stddev=0.02))
+    self.conv = keras.layers.Conv2D(filters, kernel_size=5, strides=strides, padding="same", kernel_initializer=RandomNormal(stddev=0.02))
     self.leakyRelu = keras.layers.LeakyReLU(alpha=0.2)
     # self.dropout = keras.layers.Dropout(0.3)
   def call(self, x):
@@ -54,7 +54,7 @@ class discriminator_Input(tf.keras.Model):
 class discriminator_Middle(tf.keras.Model):
   def __init__(self, filters, strides, padding):
       super(discriminator_Middle, self).__init__()
-      self.conv = tf.keras.layers.Conv2D(filters, kernel_size=4, strides=strides, padding=padding, kernel_initializer=RandomNormal(stddev=0.02))
+      self.conv = tf.keras.layers.Conv2D(filters, kernel_size=5, strides=strides, padding=padding, kernel_initializer=RandomNormal(stddev=0.02))
       self.ln = tf.keras.layers.LayerNormalization()
       self.leakyRelu = tf.keras.layers.LeakyReLU(alpha=0.2)
       # self.dropout = tf.keras.layers.Dropout(0.3)
@@ -68,7 +68,7 @@ class discriminator_Middle(tf.keras.Model):
 class discriminator_Output_channel(tf.keras.Model):
   def __init__(self, filters, strides, with_activation):
       super(discriminator_Output_channel, self).__init__()
-      self.conv = tf.keras.layers.Conv2D(filters, kernel_size=4, strides=strides, padding="same", kernel_initializer=RandomNormal(stddev=0.02))
+      self.conv = tf.keras.layers.Conv2D(filters, kernel_size=5, strides=strides, padding="same", kernel_initializer=RandomNormal(stddev=0.02))
       self.flatten = tf.keras.layers.Flatten(name='output')
       if with_activation:
         self.dense = tf.keras.layers.Dense(units=1, activation='sigmoid', name='output')

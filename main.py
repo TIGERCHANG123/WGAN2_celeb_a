@@ -44,10 +44,10 @@ def main(continue_train, train_time, train_epoch):
               optimizers=[generator_optimizer, discriminator_optimizer], metrics=[gen_loss, disc_loss], noise_dim=noise_dim, gp=20)
 
     for epoch in range(train_epoch):
-        train.train(epoch=epoch, pic=pic)
+        train.train(epoch=epoch, pic=pic, ckpt_manager=ckpt_manager)
         pic.show()
-        if (epoch + 1) % 5 == 0:
-            ckpt_manager.save()
+        # if (epoch + 1) % 5 == 0:
+        #     ckpt_manager.save()
         pic.save_created_pic(generator_model, 8, noise_dim, epoch)
     pic.show_created_pic(generator_model, 8, noise_dim)
 

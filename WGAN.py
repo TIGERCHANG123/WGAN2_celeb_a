@@ -24,9 +24,9 @@ class discriminator(tf.keras.Model):
     super(discriminator, self).__init__()
     self.input_layer = discriminator_Input(filters=128, strides=1)
     self.middle_layer_list = [
-      discriminator_Middle(filters=256, strides=2, padding='same'),
-      discriminator_Middle(filters=512, strides=2, padding='same'),
-      discriminator_Middle(filters=1024, strides=2, padding='same'),
+      discriminator_Middle(filters=256, strides=2, padding='valid'),
+      discriminator_Middle(filters=512, strides=2, padding='valid'),
+      discriminator_Middle(filters=1024, strides=2, padding='valid'),
     ]
     self.output_layer = discriminator_Output(with_activation=False)
 

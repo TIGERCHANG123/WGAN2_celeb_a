@@ -74,7 +74,7 @@ class train_one_epoch():
         self.generator_optimizer.apply_gradients(zip(gradients_of_generator, self.generator.trainable_variables))
         self.discriminator_optimizer.apply_gradients(zip(gradients_of_discriminator, self.discriminator.trainable_variables))
 
-    def train(self, epoch,  pic):
+    def train(self, epoch,  pic, ckpt_manager):
         self.gen_loss.reset_states()
         self.disc_loss.reset_states()
 
@@ -91,6 +91,8 @@ class train_one_epoch():
             #     self.train_g_step(noise)
             pic.add([self.gen_loss.result().numpy(), self.disc_loss.result().numpy()])
             pic.save()
+            if batch % 1000 == 0:
+                ckpt_manager.save()
             if batch % 100 == 0:
                 print('epoch: {}, gen loss: {}, disc loss: {}, grad penalty: {}, real loss: {}, fake loss: {}'
                       .format(epoch, self.gen_loss.result(), self.disc_loss.result(), self.grad_penalty, self.real_loss, self.fake_loss))
