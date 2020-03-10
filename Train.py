@@ -93,6 +93,6 @@ class train_one_epoch():
             pic.save()
             if batch % 1000 == 0:
                 ckpt_manager.save()
-            if batch % 100 == 0:
+            if batch % 500 == 0:
                 print('epoch: {}, gen loss: {}, disc loss: {}, grad penalty: {}, real loss: {}, fake loss: {}'
                       .format(epoch, self.gen_loss.result(), self.disc_loss.result(), self.grad_penalty, self.real_loss, self.fake_loss))
